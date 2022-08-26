@@ -1,8 +1,8 @@
-const { 
-	Client, 
-	Collection, 
-	EmbedBuilder, 
-	GatewayIntentBits 
+const {
+	Client,
+	Collection,
+	EmbedBuilder,
+	GatewayIntentBits
 } = require('discord.js');
 const fs = require('fs');
 const suid = require('short-uuid');
@@ -14,7 +14,7 @@ require('./deployCommands')()
 	.catch((err) => {
 		console.log("Deploy Commands Error: ", "\n", err);
 	});
-	
+
 const client = new Client({
 	intents: [
 		GatewayIntentBits.GuildMembers,
@@ -29,7 +29,7 @@ const config = require('./data/config.json');
 client.commands = new Collection();
 client.emotes = requier('./data/emotes.json');
 client.guildSettings = require('./data/serverData.json');
-client.generateId = new suid({length: 6});
+client.generateId = new suid({ length: 6 });
 
 const commandFiles = fs.readdirSync('./commands').filter(file => file.endsWith('.js'));
 for (const file of commandFiles) {

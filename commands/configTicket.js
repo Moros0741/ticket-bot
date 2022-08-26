@@ -1,7 +1,7 @@
-const { 
-	SlashCommandBuilder, 
-	EmbedBuilder, 
-	ActionRowBuilder, 
+const {
+	SlashCommandBuilder,
+	EmbedBuilder,
+	ActionRowBuilder,
 	SelectMenuBuilder,
 	ChannelType,
 	PermissionsBitField,
@@ -35,7 +35,7 @@ module.exports = {
 	data: new SlashCommandBuilder()
 		.setName("config-tickets")
 		.setDescription("Configure the ticket system")
-		.addChannelOption((option) => 
+		.addChannelOption((option) =>
 			option
 				.setChannelType(ChannelType.Text)
 				.setName("ticket-channel")
@@ -57,7 +57,7 @@ module.exports = {
 		);
 
 		try {
-			channel.send({embeds: [embed], components: [SelectMenu]})
+			channel.send({ embeds: [embed], components: [SelectMenu] })
 				.then(() => {
 					return interaction.reply({
 						content: `Ticket Message sent in ${channel.toString()}`,
@@ -99,39 +99,40 @@ module.exports = {
 				}
 			]
 		})
-		.then((channel) => {
-			interaction.reply({
-				content: `Ticket created in ${channel.toString()}`,
-				ephemeral: true,
-			});
+			.then((channel) => {
+				interaction.reply({
+					content: `Ticket created in ${channel.toString()}`,
+					ephemeral: true,
+				});
 
-			const embed = new EmbedBuilder()
-				.setTitle("Ticket Created `" + ticketId + "`")
-				.setDescription(stripIndents`
+				const embed = new EmbedBuilder()
+					.setTitle("Ticket Created `" + ticketId + "`")
+					.setDescription(stripIndents`
 					Ticket Created for ${squadronData.name} & ${interaction.member.displayName}
 				
 					To close this ticket press the button below.
 				`)
-				.setColor("Blue");
+					.setColor("Blue");
 
-			const row = new ActionRowBuilder().addComponents(
-				new ButtonBuilder()
-					.setLabel("Close Ticket")
-					.setStyle(ButtonStyle.Danger)
-					.setCustomId(`closeTicket-${channel.id}`)
-			);
+				const row = new ActionRowBuilder().addComponents(
+					new ButtonBuilder()
+						.setLabel("Close Ticket")
+						.setStyle(ButtonStyle.Danger)
+						.setCustomId(`closeTicket-${channel.id}`)
+				);
 
-			return channel.send({
-				content: `<@&${squadronData.role}> ${interaction.user.toString()}`,
-				embeds: [embed], 
-				components: [row]});
-		})
-		.catch((err) => {
-			console.log(err);
-			return interaction.reply({
-				content: `Error creating ticket channel`,
-				ephemeral: true,
+				return channel.send({
+					content: `<@&${squadronData.role}> ${interaction.user.toString()}`,
+					embeds: [embed],
+					components: [row]
+				});
+			})
+			.catch((err) => {
+				console.log(err);
+				return interaction.reply({
+					content: `Error creating ticket channel`,
+					ephemeral: true,
+				});
 			});
-		});
 	},
 };

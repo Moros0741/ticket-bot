@@ -26,7 +26,7 @@ module.exports = {
 			// Example: 'tickets-squadron' or 'tickets-support'
 
 			if (idParts[0] === "tickets") {
-				switch(idParts[1]) {
+				switch (idParts[1]) {
 					case "squadron":
 						await require('../commands/configTicket').executeResult(interaction, client);
 						break;
