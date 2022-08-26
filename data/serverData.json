@@ -1,0 +1,11 @@
+{
+	"guildId": "",
+	"sendGuild": null,
+	"squadrons": [{
+		"name": "Example-name",
+		"description": "Example-description",
+		"role": "Example-Role-ID",
+		"emote": "Example-emote-MAKE NULL IF NOT WANTED."
+	}],
+	"ticketCategoty": ""
+}
