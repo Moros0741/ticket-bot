@@ -121,7 +121,10 @@ module.exports = {
 					.setCustomId(`closeTicket-${channel.id}`)
 			);
 
-			return channel.send({embeds: [embed], components: [row]});
+			return channel.send({
+				content: `<@&${squadronData.role}> ${interaction.user.toString()}`,
+				embeds: [embed], 
+				components: [row]});
 		})
 		.catch((err) => {
 			console.log(err);
